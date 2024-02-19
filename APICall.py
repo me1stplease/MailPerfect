@@ -12,15 +12,15 @@ def GeminiCall(user, task, llmIn=llm):
     elif task == "Rewording (Improve)":
         prompt1 = "You are tool for rephrasing the content of \"" + user + "\" and please give only one answer."
         temp = llmIn.invoke(prompt1)
-        prompt = "Don't alter the content just add salutation, signature and subject if not present of " + temp.content + "."
+        prompt = "Don't alter the content just add salutation, signature and subject if not present of the following content " + temp.content + "."
     elif task == "Grammar Correction":
-        prompt1 = "You are Grammar Correction tool for the content of \"" + user + "\"."
+        prompt1 = "You are Grammar Correction tool for the content of \"" + user + "\" and please give only one answer."
         temp = llmIn.invoke(prompt1)
-        prompt = "Don't alter the content just add salutation, signature and subject if not present of " + temp.content + "."
+        prompt = "Don't alter the content just add salutation, signature and subject if not present of the following content " + temp.content + "."
     else:
         prompt1 = "You are tool for rephrasing the content of \"" + user + "\" and please give only one answer."
         temp = llmIn.invoke(prompt1)
-        prompt = "Don't alter the content just add salutation, signature and subject if not present of " + temp.content + "."
+        prompt = "Don't alter the content just add salutation, signature and subject if not present of the following content " + temp.content + "."
 
     # prompt = "'{user}' rephrase the content".format( user="Hi I got this idea in mind, but I haven't really thought
     # deeply about how to make it happen. It would be good to hear ideas from other teammates so that we can

@@ -23,7 +23,13 @@ st.header("Enter your Input")
 txt = st.text_area(
     "This place belong to the user..."
 )
-if txt != "" and task is not None:
-    st.write(f'You wrote {len(txt)} characters.')
-    st.header("Your Mail: ")
-    st.write(GenAI(txt, task))
+
+if st.button("Create", type="primary"):
+    if txt != "" and task is not None:
+        st.write(f'You wrote {len(txt)} characters.')
+        st.header("Your Mail: ")
+        st.write(GenAI(txt, task))
+    else:
+        st.write("Please provide the input and select the task")
+
+
