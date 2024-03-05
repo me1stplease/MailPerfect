@@ -1,4 +1,6 @@
 langchain-google-genai
-streamlit
+streamlit~=1.31.1
 google-generativeai
-python-dotenv
+python-dotenv~=1.0.1
+pandas~=2.2.0
+numpy~=1.26.4
