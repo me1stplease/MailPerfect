@@ -8,6 +8,8 @@ from GetPii import getPii
 from EnCrypthPii import encpi
 
 def ui():
+    st.set_page_config(page_title = "MailPrefect")
+
     st.title("MailPrefect")
     st.caption(
         'A web app powered by GenAI designed to form perfect email with the capability to ' +
