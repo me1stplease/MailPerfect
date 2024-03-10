@@ -10,7 +10,7 @@ def keyGen(al):
 def encrypt(al, key, text):
     encryptedText = ''
     for char in text:
-        if char == ' ' or char == ',' or char == '.':
+        if char not in al:
             encryptedText += char
         else:
             index = al.index(char)
@@ -22,7 +22,7 @@ def encrypt(al, key, text):
 def decrypt(al, key, text):
     decryptedText = ''
     for char in text:
-        if char == ' ' or char == ',' or char == '.':
+        if char not in al:
             decryptedText += char
         else:
             index = key.index(char)
@@ -31,13 +31,12 @@ def decrypt(al, key, text):
     return decryptedText
 
 
-if __name__ == '__main__':
-    alpha = list('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789_@')
-    inputText = 'My name is Mahtab Alam'
+# def ende(inputText,k):
+#     # inputText = 'My name is Mahtab Alam'
 
-    k = keyGen(alpha)
+#     # k = keyGen(alpha)
 
-    enc = encrypt(alpha, k, inputText)
-    dec = decrypt(alpha, k, enc)
-    print(enc)
-    print(dec)
+#     enc = encrypt(alpha, k, inputText)
+#     dec = decrypt(alpha, k, enc)
+#     print(enc)
+#     print(dec)

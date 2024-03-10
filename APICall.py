@@ -9,62 +9,67 @@ llm = ChatGoogleGenerativeAI(model="gemini-pro")
 
 
 def GeminiCall(wStyle, user, task, llmIn=llm):
-    if len(wStyle) == 0 or wStyle is None:
-        if task == "Email Formation":
-            prompt = "You are tool for email formation of \"" + user + "\" with proper salutation, signature and " \
-                                                                       "subject."
-        elif task == "Rewording (Improve)":
-            prompt1 = "You are tool for rephrasing the content of \"" + user + "\" and don't provide options."
-            temp = llmIn.invoke(prompt1)
-            prompt = "\"" + temp.content + "\" Don't alter the content just add salutation, signature and subject if " \
-                                           "not " \
-                                           "present."
-        elif task == "Grammar Correction":
-            prompt1 = "You are Grammar Correction tool for the content of \"" + user + "\" and don't provide options."
-            temp = llmIn.invoke(prompt1)
-            prompt = "\"" + temp.content + "\" Don't alter the content just add salutation, signature and subject if " \
-                                           "not " \
-                                           "present."
+    err ='There is some error getting the result or input may contain some abusive or harmful content. Please try again.'
+    try:
+        if len(wStyle) == 0 or wStyle is None:
+            if task == "Email Formation":
+                prompt = "You are tool for email formation of \"" + user + "\" with proper salutation, signature and " \
+                                                                        "subject."
+            elif task == "Rewording (Improve)":
+                prompt1 = "You are tool for rephrasing the content of \"" + user + "\" and don't provide options."
+                temp = llmIn.invoke(prompt1)
+                prompt = "\"" + temp.content + "\" Don't alter the content just add salutation, signature and subject if " \
+                                            "not " \
+                                            "present."
+            elif task == "Grammar Correction":
+                prompt1 = "You are Grammar Correction tool for the content of \"" + user + "\" and don't provide options."
+                temp = llmIn.invoke(prompt1)
+                prompt = "\"" + temp.content + "\" Don't alter the content just add salutation, signature and subject if " \
+                                            "not " \
+                                            "present."
+            else:
+                prompt1 = "You are tool for rephrasing the content of \"" + user + "\" and don't provide options."
+                temp = llmIn.invoke(prompt1)
+                prompt = "\"" + temp.content + "\" Don't alter the content just add salutation, signature and subject if " \
+                                            "not " \
+                                            "present."
         else:
-            prompt1 = "You are tool for rephrasing the content of \"" + user + "\" and don't provide options."
-            temp = llmIn.invoke(prompt1)
-            prompt = "\"" + temp.content + "\" Don't alter the content just add salutation, signature and subject if " \
-                                           "not " \
-                                           "present."
-    else:
-        ws = str(wStyle)
-        if task == "Email Formation":
-            prompt = "You are tool for email formation of \"" + user + "\" with proper salutation, signature and " \
-                                                                       "subject in the listed writing style used in a " \
-                                                                       "single mail: " + ws
-        elif task == "Rewording (Improve)":
-            prompt1 = "You are tool for rephrasing the content of \"" + user + "\" " + " in the listed writing style: " + ws + " and don't provide options."
-            temp = llmIn.invoke(prompt1)
-            prompt = "\"" + temp.content + "\" Don't alter the content just add salutation, signature and subject if " \
-                                           "not " \
-                                           "present."
-        elif task == "Grammar Correction":
-            prompt1 = "You are Grammar Correction tool for the content of \"" + user + "\" " + "in the listed writing " \
-                                                                                               "style: " + ws + " and" \
-                                                                                                                " don't provide options."
-            temp = llmIn.invoke(prompt1)
-            prompt = "\"" + temp.content + "\" Don't alter the content just add salutation, signature and subject if " \
-                                           "not " \
-                                           "present."
-        else:
-            prompt1 = "You are tool for rephrasing the content of \"" + user + "\" " + " in the listed writing style: " + ws + " and don't provide options."
-            temp = llmIn.invoke(prompt1)
-            prompt = "\"" + temp.content + "\" Don't alter the content just add salutation, signature and subject if " \
-                                           "not " \
-                                           "present."
+            ws = str(wStyle)
+            if task == "Email Formation":
+                prompt = "You are tool for email formation of \"" + user + "\" with proper salutation, signature and " \
+                                                                        "subject in the listed writing style used in a " \
+                                                                        "single mail: " + ws
+            elif task == "Rewording (Improve)":
+                prompt1 = "You are tool for rephrasing the content of \"" + user + "\" " + " in the listed writing style: " + ws + " and don't provide options."
+                temp = llmIn.invoke(prompt1)
+                prompt = "\"" + temp.content + "\" Don't alter the content just add salutation, signature and subject if " \
+                                            "not " \
+                                            "present."
+            elif task == "Grammar Correction":
+                prompt1 = "You are Grammar Correction tool for the content of \"" + user + "\" " + " and" \
+                                                                                                                    " don't provide options."
+                temp = llmIn.invoke(prompt1)
+                prompt = "\"" + temp.content + "\" Don't alter the content just add salutation, signature and subject if " \
+                                            "not " \
+                                            "present."
+            else:
+                prompt1 = "You are tool for rephrasing the content of \"" + user + "\" " + " in the listed writing style: " + ws + " and don't provide options."
+                temp = llmIn.invoke(prompt1)
+                prompt = "\"" + temp.content + "\" Don't alter the content just add salutation, signature and subject if " \
+                                            "not " \
+                                            "present."
 
-    # prompt = "'{user}' rephrase the content".format( user="Hi I got this idea in mind, but I haven't really thought
-    # deeply about how to make it happen. It would be good to hear ideas from other teammates so that we can
-    # collectively decide on the most practical automation idea. Thanks and Regards, Mahtab Alam")
+        # prompt = "'{user}' rephrase the content".format( user="Hi I got this idea in mind, but I haven't really thought
+        # deeply about how to make it happen. It would be good to hear ideas from other teammates so that we can
+        # collectively decide on the most practical automation idea. Thanks and Regards, Mahtab Alam")
 
-    result = llmIn.invoke(prompt)
-    print(result.content)
-    return result.content
+        result = llmIn.invoke(prompt)
+        print(result.content)
+        return result.content
+    except Exception as e:
+        print(e.args[0])
+        # return e.args[0]
+    return err
 
 
 def senAnalyze(wStyle, genMail, llmIn=llm):
