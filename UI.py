@@ -6,7 +6,6 @@ from APICall import senAnalyze as analysis
 from EnDe import keyGen,encrypt,decrypt
 from GetPii import getPii
 from EnCrypthPii import encpi
-import os
 
 def ui():
     st.set_page_config(page_title = "MailPrefect")
@@ -78,7 +77,6 @@ def ui():
 
             encText = encpi(txt,pii,encrypted)
             print('EncText : ',encText)
-            os.write(1,encText)
 
             genRes = GenAI(style, txt, encText)
 
