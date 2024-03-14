@@ -78,7 +78,7 @@ def ui():
 
             encText = encpi(txt,pii,encrypted)
             print('EncText : ',encText)
-            os.write(1,encText)
+            st.write("Encrypted: ", encText)
 
             genRes = GenAI(style, txt, encText)
 
