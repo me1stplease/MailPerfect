@@ -74,11 +74,12 @@ def ui():
 
             st.divider()
 
-            st.subheader("Your email is being generated...")
-
             encText = encpi(txt,pii,encrypted)
             print('EncText : ',encText)
-            st.write("Encrypted: ", encText)
+            st.write("Encrypted Input: \n", encText)
+
+            st.divider()
+            st.subheader("Your email is being generated...")
 
             genRes = GenAI(style, txt, encText)
 
